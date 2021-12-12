@@ -8,18 +8,22 @@ void portConfiguration()
     P1MDIN = 0xff;
     P2MDOUT = 0xff;
 }
-void defaultConfig()
-{   //turn down watch-dog timer
-    WDTCN = 0xde;
-    WDTCN = 0xad;
-
+void TimerConfig()
+{
     TMOD = 0x01;  //mode 1
     TCON = 0x010; //TR0(bit4) = 1
     CKCON = 0x010;
     IE = 0x082; //EA(bit7)=1, ET0(bit1) =1
     TL0 = 0x0C6; //#C6h (1734= 0x6C6)
     TH0 = 0x06; //#6h
+}
+void defaultConfig()
+{   //turn down watch-dog timer
+    WDTCN = 0xde;
+    WDTCN = 0xad;
 
+    TimerConfig();
+    
     //initialize SFR setup page
     SFRPAGE = CONFIG_PAGE;
 
